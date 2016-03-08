@@ -11,7 +11,7 @@
         return {
             restrict: 'A',
             link: function($scope, elem, attr) {
-                
+
                 // postpone linking to next digest to allow for unique id generation
                 $timeout(function() {
                     var classList = (attr.outsideIfNot !== undefined) ? attr.outsideIfNot.replace(', ', ',').split(',') : [],
@@ -23,6 +23,9 @@
                     }
 
                     function eventHandler(e) {
+												if (e.target.type === 'file') {
+													return;
+												}
 
                         // check if our element already hidden and abort if so
                         if (angular.element(elem).hasClass("ng-hide")) {
